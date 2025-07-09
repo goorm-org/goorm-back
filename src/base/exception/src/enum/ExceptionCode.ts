@@ -1,0 +1,16 @@
+export enum ExceptionCode {
+  BAD_REQUEST = '001',
+  NOT_FOUND = '002',
+  UNAUTHORIZED = '003',
+  INTERNAL_SERVER_ERROR = '004',
+  NOT_ALLOWED = '005',
+  FORBIDDEN = '006',
+  TIME_OUT = '007',
+  UNAVAILABLE = '008',
+  UNHEALTHY = '009',
+  TOO_MANY_REQUEST = '011',
+  TOKEN_EXPIRED = '012',
+  INVALID_TOKEN = '013',
+  FORCE_LOGOUT = '014', // 강제 만료 처리되어 로그아웃됨
+  AUTO_LOGOUT_OTHER_DEVICES = '015', // 기기 제한으로 로그아웃됨
+}
