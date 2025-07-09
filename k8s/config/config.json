@@ -1,5 +1,4 @@
 {
-    "GREETING": "Hello from Nodejs Backend",
-    "PORT": 8080
-  }
-  
+  "GREETING": "Hello from Nodejs Backend",
+  "PORT": 8080
+}
