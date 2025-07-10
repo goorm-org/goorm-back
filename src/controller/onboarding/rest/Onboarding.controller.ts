@@ -26,8 +26,12 @@ export class OnboardingController {
   @Post()
   async createOnboarding(
     @LoginUser() userId: number,
-    @Body() createOnboardingReqDto: CreateOnboardingReqDto,
+    @Body() createOnboardingReqDto: any,
   ): Promise<OnboardingOrmEntity> {
+    console.log(
+      '🚀 ~ OnboardingController ~ createOnboardingReqDto:',
+      createOnboardingReqDto,
+    );
     return await this.onboardingService.createOnboarding(
       userId,
       createOnboardingReqDto,

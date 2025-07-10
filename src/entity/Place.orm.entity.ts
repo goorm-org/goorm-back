@@ -7,7 +7,7 @@ import { TripOrmEntity } from './Trip.orm.entity';
 @Entity('place')
 export class PlaceOrmEntity extends BaseDateOrmEntity {
   @Column()
-  name: string;
+  title: string;
 
   @Column()
   address: string;
@@ -20,6 +20,9 @@ export class PlaceOrmEntity extends BaseDateOrmEntity {
 
   @Column({ nullable: true })
   categoryHigh: string;
+
+  @Column({ nullable: true })
+  shortsUrl: string;
 
   @Column('simple-array', { nullable: true })
   categoryMiddle: string[];
@@ -37,7 +40,13 @@ export class PlaceOrmEntity extends BaseDateOrmEntity {
   congestionDegreeList: CongestionOrmEntity[];
 
   @Column('json', { nullable: true })
-  details: any; // 쇼츠가 있을 경우 추가
+  pricePerPerson: number[];
+
+  @Column({ nullable: true })
+  averagePrice: number;
+
+  @Column({ nullable: true })
+  averageRating: string;
 
   @OneToMany(() => BookmarkOrmEntity, (bookmark) => bookmark.place)
   bookmarks: BookmarkOrmEntity[];
