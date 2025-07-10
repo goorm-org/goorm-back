@@ -9,8 +9,8 @@ export class ShortsService {
     private readonly placeRepository: PlaceRepository,
   ) {}
 
-  async getShortsList(): Promise<PlaceOrmEntity[]> {
+  async getShortsList(userId: number): Promise<PlaceOrmEntity[]> {
     const SHORTS_LIMIT = 5;
-    return this.placeRepository.findRandomShorts(SHORTS_LIMIT);
+    return this.placeRepository.findRandomShorts(SHORTS_LIMIT, userId);
   }
 }

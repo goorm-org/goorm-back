@@ -15,6 +15,6 @@ export class ShortsController {
   @Get()
   async getShortsList(@LoginUser() userId: number): Promise<PlaceOrmEntity[]> {
     console.log('User ID for shorts list:', userId);
-    return this.shortsService.getShortsList();
+    return this.shortsService.getShortsList(userId);
   }
 }
