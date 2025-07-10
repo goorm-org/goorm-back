@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 
 import { BaseOrmRepository } from '@base/database/Base.repository';
 import { PlaceOrmEntity } from '@entity/Place.orm.entity';
@@ -12,6 +12,23 @@ export class PlaceRepository extends BaseOrmRepository<PlaceOrmEntity> {
     repository: Repository<PlaceOrmEntity>,
   ) {
     super(repository);
+  }
+
+  async findByPlaceIds(placeIds: number[]): Promise<PlaceOrmEntity[]> {
+    return this.findManyByIds(placeIds);
+  }
+
+  async findPlacesNotInIds(
+    excludedPlaceIds: number[],
+  ): Promise<PlaceOrmEntity[]> {
+    if (excludedPlaceIds.length === 0) {
+      return this.repository.find(); // Return all places if exclusion list is empty
+    }
+
+    return this.repository
+      .createQueryBuilder('place')
+      .where('place.id NOT IN (:...excludedPlaceIds)', { excludedPlaceIds })
+      .getMany();
   }
 
   async findRandomShorts(

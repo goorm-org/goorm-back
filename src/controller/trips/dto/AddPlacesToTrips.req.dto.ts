@@ -5,6 +5,5 @@ export class AddPlacesToTripReqDto {
   date: string;
 
   @IsArray()
-  @IsNumber({}, { each: true })
   placesIds: number[];
 }

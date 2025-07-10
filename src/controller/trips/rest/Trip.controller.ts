@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  Inject,
+  NotFoundException,
   Param,
   ParseIntPipe,
   Post,
@@ -14,80 +16,47 @@ import { LoginUser } from '@base/decorator/LoginUser.decorator';
 import { AddPlacesToTripReqDto } from '@controller/trips/dto/AddPlacesToTrips.req.dto';
 import { TripResDto } from '@controller/trips/dto/Trip.res.dto';
 import { PlaceInfoResDto } from '@controller/abc/dto/PlaceInfo.res.dto';
-import { OnboardingResDto } from '@controller/onboarding/dto/Onboarding.res.dto';
 import { PlacesPerDayResDto } from '../dto/PlacesPerDay.res.dto';
+import { TripService } from '@application/trip/Trip.service';
+import { TripOrmEntity } from '@entity/Trip.orm.entity';
+import { PlaceOrmEntity } from '@entity/Place.orm.entity';
 
 @Controller('trips')
 @UseGuards(LoginGuard)
 export class TripController {
+  constructor(
+    @Inject(TripService)
+    private readonly tripService: TripService,
+  ) {}
+
   @Post()
   async addPlacesToTrip(
     @LoginUser() userId: number,
     @Body() addPlacesToTripReqDto: any,
-  ): Promise<TripResDto> {
-    console.log(`User ${userId} creating trip`, addPlacesToTripReqDto);
+  ): Promise<PlaceOrmEntity[]> {
+    console.log('🚀 ~ TripController ~ userId:', userId);
+    console.log(
+      '🚀 ~ TripController ~ addPlacesToTripReqDto:',
+      addPlacesToTripReqDto.date,
+      addPlacesToTripReqDto.placeIds,
+    );
+    const places = await this.tripService.addPlacesToTrip(
+      userId,
+      addPlacesToTripReqDto.date,
+      addPlacesToTripReqDto.placeIds,
+    );
 
-    const trip = new TripResDto();
-    trip.id = 1;
-
-    const recommendation1 = new PlaceInfoResDto();
-    recommendation1.id = 101;
-    recommendation1.name = '비자림';
-    recommendation1.address = '제주특별자치도 제주시 구좌읍 비자숲길 55';
-    recommendation1.latitude = '33.333333';
-    recommendation1.longitude = '126.333333';
-
-    const recommendation2 = new PlaceInfoResDto();
-    recommendation2.id = 102;
-    recommendation2.name = '사려니숲길';
-    recommendation2.address = '제주특별자치도 제주시 조천읍 교래리';
-    recommendation1.latitude = '33.333333';
-    recommendation1.longitude = '126.333333';
-
-    const place1 = new PlaceInfoResDto();
-    place1.id = 1;
-    place1.name = '우도';
-    place1.address = '제주특별자치도 제주시 우도면';
-    place1.recommendations = [recommendation1, recommendation2];
-
-    const place2 = new PlaceInfoResDto();
-    place2.id = 2;
-    place2.name = '성산일출봉';
-    place2.address = '제주특별자치도 서귀포시 성산읍 일출로 284-12';
-    place2.recommendations = [place1];
-
-    trip.placesPerDayList = [{ date: '2024-08-01', places: [place1, place2] }];
-
-    return trip;
+    return places;
   }
 
   @Get()
   async getMyTrip(@LoginUser() userId: number): Promise<TripResDto> {
-    console.log(`User ${userId} fetching their trips`);
-    const trip = new TripResDto();
-    trip.id = 123;
-
-    const place1 = new PlaceInfoResDto();
-    place1.id = 1;
-    place1.name = '협재 해수욕장';
-    place1.address = '제주특별자치도 제주시 한림읍 협재리';
-
-    const place2 = new PlaceInfoResDto();
-    place2.id = 2;
-    place2.name = '금능 해수욕장';
-    place2.address = '제주특별자치도 제주시 한림읍 금능리';
-
-    const place3 = new PlaceInfoResDto();
-    place3.id = 3;
-    place3.name = '오목천 해수욕장';
-    place3.address = '제주특별자치도 제주시 한림읍 오목천리';
-
-    trip.placesPerDayList = [
-      { date: '2024-08-01', places: [place1] },
-      { date: '2024-08-02', places: [place2, place3] },
-    ];
-
-    return trip;
+    const trips = await this.tripService.getMyTrips(userId);
+    // For now, let's just return the first trip if it exists.
+    if (!trips || trips.length === 0) {
+      throw new NotFoundException('No trips found for this user.');
+    }
+    return this.toTripResDto(trips[0]);
   }
 
   @Delete('/dates/:dateId/places')
@@ -108,5 +77,32 @@ export class TripController {
     placesPerDay.places = [remainingPlace];
 
     return [placesPerDay];
+  }
+
+  private toTripResDto(trip: TripOrmEntity): TripResDto {
+    const tripDto = new TripResDto();
+    tripDto.id = trip.id;
+
+    const placesPerDayMap = new Map<string, PlaceInfoResDto[]>();
+    if (trip.place) {
+      const dateKey = trip.date;
+      if (!placesPerDayMap.has(dateKey)) {
+        placesPerDayMap.set(dateKey, []);
+      }
+      const placeDto = new PlaceInfoResDto();
+      placeDto.id = trip.place.id;
+      placeDto.name = trip.place.title;
+      placeDto.address = trip.place.address;
+      placesPerDayMap.get(dateKey)!.push(placeDto);
+    }
+
+    tripDto.placesPerDayList = Array.from(placesPerDayMap.entries()).map(
+      ([date, places]) => ({ date, places }),
+    );
+
+    // recommendationList mapping would go here
+    tripDto.recommendationList = [];
+
+    return tripDto;
   }
 }

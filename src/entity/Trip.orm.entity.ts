@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 import { BaseDateOrmEntity } from '@base/database/BaseDate.orm.entity';
 import { PlaceOrmEntity } from './Place.orm.entity';
 
@@ -10,8 +10,6 @@ export class TripOrmEntity extends BaseDateOrmEntity {
   @Column()
   userId: number;
 
-  @OneToMany(() => PlaceOrmEntity, (place) => place.trip, {
-    cascade: true,
-  })
-  places: PlaceOrmEntity[];
+  @ManyToOne(() => PlaceOrmEntity, (place) => place.trips)
+  place: PlaceOrmEntity;
 }

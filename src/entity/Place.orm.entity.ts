@@ -44,13 +44,14 @@ export class PlaceOrmEntity extends BaseDateOrmEntity {
 
   @Column({ nullable: true })
   averagePrice: number;
-
   @Column({ nullable: true })
   averageRating: string;
 
   @OneToMany(() => BookmarkOrmEntity, (bookmark) => bookmark.place)
   bookmarks: BookmarkOrmEntity[];
 
-  @ManyToOne(() => TripOrmEntity, (trip) => trip.places)
-  trip: TripOrmEntity;
+  @OneToMany(() => TripOrmEntity, (trip) => trip.place)
+  trips: TripOrmEntity[];
+
+  recommendations: PlaceOrmEntity[];
 }
