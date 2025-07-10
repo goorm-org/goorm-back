@@ -15,7 +15,13 @@ export class PlaceRepository extends BaseOrmRepository<PlaceOrmEntity> {
   }
 
   async findByPlaceIds(placeIds: number[]): Promise<PlaceOrmEntity[]> {
-    return this.findManyByIds(placeIds);
+    if (placeIds.length === 0) {
+      return [];
+    }
+    return this.repository.find({
+      where: { id: In(placeIds) },
+      relations: ['congestionDegreeList'],
+    });
   }
 
   async findPlacesNotInIds(
@@ -43,6 +49,7 @@ export class PlaceRepository extends BaseOrmRepository<PlaceOrmEntity> {
         'bookmark.userId = :userId',
         { userId },
       )
+      .leftJoinAndSelect('place.congestionDegreeList', 'congestionDegreeList')
       .where('place.shortsUrl IS NOT NULL')
       .orderBy('RAND()')
       .take(limit)

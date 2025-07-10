@@ -5,13 +5,16 @@ import { PlaceOrmEntity } from './Place.orm.entity';
 @Entity('congestion')
 export class CongestionOrmEntity extends BaseDateOrmEntity {
   @Column()
-  population: number;
+  month: number;
 
   @Column()
-  time: Date;
+  day: number;
 
   @Column()
-  degree: number;
+  time: number;
+
+  @Column()
+  degree: number; // 1: 최소, 3: 혼잡
 
   @ManyToOne(() => PlaceOrmEntity, (place) => place.congestionDegreeList)
   place: PlaceOrmEntity;

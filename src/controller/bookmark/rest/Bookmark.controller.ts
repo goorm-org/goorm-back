@@ -34,6 +34,7 @@ export class BookmarkController {
   async deleteBookmark(
     @Body('ids') ids: number[],
   ): Promise<BookmarkOrmEntity[]> {
+    console.log('🚀 ~ BookmarkController ~ ids:', ids);
     return await this.bookmarkService.deleteBookmark(ids);
   }
 
