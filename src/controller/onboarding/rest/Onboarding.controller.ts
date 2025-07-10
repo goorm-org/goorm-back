@@ -25,8 +25,11 @@ export class OnboardingController {
     console.log('CreateOnboardingReqDto:', createOnboardingReqDto);
     // TODO: 비즈니스 로직 구현
     const mockData = new OnboardingResDto();
+    mockData.id = 1;
     mockData.vibeList = createOnboardingReqDto.vibeList;
     mockData.placeCategoryList = [10, 20, 30];
+    mockData.from = new Date('2024-01-01');
+    mockData.to = new Date('2024-01-03');
     return mockData;
   }
 
@@ -35,8 +38,11 @@ export class OnboardingController {
     console.log('🚀 ~ OnboardingController ~ getOnboarding ~ userId:', userId);
     // TODO: 비즈니스 로직 구현
     const mockData = new OnboardingResDto();
+    mockData.id = 1;
     mockData.vibeList = [1, 2, 3, 4, 5];
     mockData.placeCategoryList = [11, 22, 33];
+    mockData.from = new Date('2024-01-01');
+    mockData.to = new Date('2024-01-03');
     return mockData;
   }
 
@@ -49,8 +55,11 @@ export class OnboardingController {
     console.log('ChangeOnboardingReqDto:', changeOnboardingReqDto);
     // TODO: 비즈니스 로직 구현
     const mockData = new OnboardingResDto();
+    mockData.id = 1;
     mockData.vibeList = changeOnboardingReqDto.vibeList;
     mockData.placeCategoryList = changeOnboardingReqDto.placeCategoryList;
+    mockData.from = new Date('2024-01-01');
+    mockData.to = new Date('2024-01-03');
     return mockData;
   }
 }

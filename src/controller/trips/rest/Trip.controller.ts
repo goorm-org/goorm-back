@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { LoginGuard } from '@base/guard/Login.token.guard';
 import { LoginUser } from '@base/decorator/LoginUser.decorator';
-import { CreateTripReqDto } from '@controller/trips/dto/CreateTrip.req.dto';
+import { AddPlacesToTripReqDto } from '@controller/trips/dto/AddPlacesToTrips.req.dto';
 import { TripResDto } from '@controller/trips/dto/Trip.res.dto';
 import { PlaceInfoResDto } from '@controller/abc/dto/PlaceInfo.res.dto';
 import { OnboardingResDto } from '@controller/onboarding/dto/Onboarding.res.dto';
@@ -21,32 +21,43 @@ import { PlacesPerDayResDto } from '../dto/PlacesPerDay.res.dto';
 @UseGuards(LoginGuard)
 export class TripController {
   @Post()
-  async createTrip(
+  async addPlacesToTrip(
     @LoginUser() userId: number,
-    @Body() createTripReqDto: CreateTripReqDto,
+    @Body() addPlacesToTripReqDto: any,
   ): Promise<TripResDto> {
-    console.log(`User ${userId} creating trip`, createTripReqDto);
+    console.log(`User ${userId} creating trip`, addPlacesToTripReqDto);
 
     const trip = new TripResDto();
-    trip.id = Math.floor(Math.random() * 1000) + 1;
+    trip.id = 1;
 
-    const onboarding = new OnboardingResDto();
-    onboarding.vibeList = [1, 3, 5];
-    onboarding.placeCategoryList = [101, 202];
+    const recommendation1 = new PlaceInfoResDto();
+    recommendation1.id = 101;
+    recommendation1.name = '비자림';
+    recommendation1.address = '제주특별자치도 제주시 구좌읍 비자숲길 55';
+    recommendation1.latitude = '33.333333';
+    recommendation1.longitude = '126.333333';
 
-    trip.onboarding = onboarding;
-    trip.placesPerDayList = createTripReqDto.placesPerDayList.map((p) => {
-      const placesPerDay = new PlacesPerDayResDto();
-      placesPerDay.date = new Date(p.date);
-      placesPerDay.places = p.placesIds.map((id) => {
-        const place = new PlaceInfoResDto();
-        place.id = id;
-        return place;
-      });
-      return placesPerDay;
-    });
+    const recommendation2 = new PlaceInfoResDto();
+    recommendation2.id = 102;
+    recommendation2.name = '사려니숲길';
+    recommendation2.address = '제주특별자치도 제주시 조천읍 교래리';
+    recommendation1.latitude = '33.333333';
+    recommendation1.longitude = '126.333333';
 
-    console.log('🚀 ~ TripController ~ trip:', trip);
+    const place1 = new PlaceInfoResDto();
+    place1.id = 1;
+    place1.name = '우도';
+    place1.address = '제주특별자치도 제주시 우도면';
+    place1.recommendations = [recommendation1, recommendation2];
+
+    const place2 = new PlaceInfoResDto();
+    place2.id = 2;
+    place2.name = '성산일출봉';
+    place2.address = '제주특별자치도 서귀포시 성산읍 일출로 284-12';
+    place2.recommendations = [place1];
+
+    trip.placesPerDayList = [{ date: '2024-08-01', places: [place1, place2] }];
+
     return trip;
   }
 
@@ -55,11 +66,6 @@ export class TripController {
     console.log(`User ${userId} fetching their trips`);
     const trip = new TripResDto();
     trip.id = 123;
-
-    const onboarding = new OnboardingResDto();
-    onboarding.vibeList = [2, 4, 6];
-    onboarding.placeCategoryList = [102, 301];
-    trip.onboarding = onboarding;
 
     const place1 = new PlaceInfoResDto();
     place1.id = 1;
@@ -77,8 +83,8 @@ export class TripController {
     place3.address = '제주특별자치도 제주시 한림읍 오목천리';
 
     trip.placesPerDayList = [
-      { date: new Date('2024-08-01'), places: [place1] },
-      { date: new Date('2024-08-02'), places: [place2, place3] },
+      { date: '2024-08-01', places: [place1] },
+      { date: '2024-08-02', places: [place2, place3] },
     ];
 
     return trip;
@@ -98,7 +104,7 @@ export class TripController {
     remainingPlace.address = '제주특별자치도 제주시';
 
     const placesPerDay = new PlacesPerDayResDto();
-    placesPerDay.date = new Date('2024-08-01');
+    placesPerDay.date = '2024-08-01';
     placesPerDay.places = [remainingPlace];
 
     return [placesPerDay];

@@ -35,6 +35,14 @@ export class PlaceInfoResDto {
   @IsString()
   address: string;
 
+  @IsOptional()
+  @IsString()
+  latitude: string;
+
+  @IsOptional()
+  @IsString()
+  longitude: string;
+
   @IsObject()
   @ValidateNested()
   @Type(() => Category)
@@ -57,4 +65,10 @@ export class PlaceInfoResDto {
   @IsOptional()
   @Type(() => PlaceDetailsReqDto)
   details: PlaceDetailsReqDto; // 쇼츠가 있을 경우 추가
+
+  @IsArray()
+  @IsOptional()
+  @ValidateNested({ each: true })
+  @Type(() => PlaceInfoResDto)
+  recommendations: PlaceInfoResDto[];
 }

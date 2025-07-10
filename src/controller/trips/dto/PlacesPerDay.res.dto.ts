@@ -1,10 +1,10 @@
 import { Type } from 'class-transformer';
-import { IsArray, IsDate, ValidateNested } from 'class-validator';
+import { IsArray, IsDateString, ValidateNested } from 'class-validator';
 import { PlaceInfoResDto } from '../../abc/dto/PlaceInfo.res.dto';
 
 export class PlacesPerDayResDto {
-  @IsDate()
-  date: Date;
+  @IsDateString()
+  date: string;
 
   @IsArray()
   @ValidateNested({ each: true })
