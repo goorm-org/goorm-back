@@ -17,7 +17,6 @@ export class AppRequestLogInterceptor implements NestInterceptor {
     next: CallHandler<any>,
   ): Observable<any> | Promise<Observable<any>> {
     const start = Date.now();
-    console.log('🚀 ~ AppRequestLogInterceptor ~ start:', start);
     // this.logger.http('REQUEST', context);
     return next.handle().pipe(
       map((data) => {
