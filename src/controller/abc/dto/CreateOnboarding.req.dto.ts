@@ -1,4 +1,4 @@
-import { IsArray, IsDate, IsDateString, IsNumber } from 'class-validator';
+import { IsArray, IsDateString, IsNumber } from 'class-validator';
 
 export class CreateOnboardingReqDto {
   @IsArray()
@@ -6,10 +6,10 @@ export class CreateOnboardingReqDto {
   vibeList: number[];
 
   @IsDateString()
-  from: Date;
+  from: string;
 
   @IsDateString()
-  to: Date;
+  to: string;
 
   @IsArray()
   @IsNumber({}, { each: true })
