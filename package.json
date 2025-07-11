@@ -12,6 +12,7 @@
     "start:local": "NODE_ENV=local nest start --watch",
     "start:dev": "NODE_ENV=dev node dist/main",
     "start:prod": "pm2 start ecosystem.config.js --env prod",
+    "start:server": "pm2 start ecosystem.config.js --env dev",
     "start:debug": "nest start --debug --watch",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
