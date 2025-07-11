@@ -24,6 +24,17 @@ export class PlaceRepository extends BaseOrmRepository<PlaceOrmEntity> {
     });
   }
 
+  async findByPlaceIdsWithoutDegrees(
+    placeIds: number[],
+  ): Promise<PlaceOrmEntity[]> {
+    if (placeIds.length === 0) {
+      return [];
+    }
+    return this.repository.find({
+      where: { id: In(placeIds) },
+    });
+  }
+
   async findPlacesNotInIds(
     excludedPlaceIds: number[],
   ): Promise<PlaceOrmEntity[]> {
