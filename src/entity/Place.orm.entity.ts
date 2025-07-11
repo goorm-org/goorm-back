@@ -12,10 +12,10 @@ export class PlaceOrmEntity extends BaseDateOrmEntity {
   @Column()
   address: string;
 
-  @Column()
+  @Column({ nullable: true })
   latitude: string;
 
-  @Column()
+  @Column({ nullable: true })
   longitude: string;
 
   @Column({ nullable: true })
