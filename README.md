@@ -1,98 +1,114 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🍊 제주고 _JEJUGO_
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+![thumbnail](https://github.com/user-attachments/assets/23f28deb-ce28-419a-b5d7-d196502d989c)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+> 🏆 <b>구름톤 in Jeju 해커톤 대상</b><br />
 
-## Description
+**숏폼 기반 탐색과 AI 루트 설계, 혼잡도**까지!<br />
+나만의 제주를 누릴 수 있는 여행 서비스, **JejuGo**
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+<br /><br />
 
-## Project setup
+# ✈️ 배경 _Problem_
 
-```bash
-$ yarn install
-```
+![problem](https://github.com/user-attachments/assets/05cbbd4a-aaac-430d-83dd-a261c715314f)
 
-## Compile and run the project
+제주를 방문하는 외국인 여행객의 여행 동선 설계의 어려움과, 소수의 명소만 집중되는 혼잡도로 인해 재방문 의사가 저하되는 문제가 나타나고 있습니다.
 
-```bash
-# development
-$ yarn run start
+이러한 문제를 해결하기 위해, **숏츠 영상을 통해 제주 로컬 여행지를 자연스럽게 발견하고, AI가 개인 선호에 맞는 여행 루트를 추천해주는 '제주고'** 서비스를 개발했습니다.
 
-# watch mode
-$ yarn run start:dev
+<br /><br />
 
-# production mode
-$ yarn run start:prod
-```
+# ✨ 서비스 소개 _Solution_
 
-## Run tests
+![solution](https://github.com/user-attachments/assets/1bfb9492-6941-44d5-8ee9-6e563822f021)
 
-```bash
-# unit tests
-$ yarn run test
+|        **기능**         |                **설명**                |
+| :---------------------: | :------------------------------------: |
+|      **숏폼 탐색**      |  숏츠 영상으로 로컬 명소 직관적 탐색   |
+| **위치 기반 루트 추천** |  개인화된 여행 루트 및 일정 자동 설계  |
+|     **혼잡도 안내**     | 실시간 혼잡도 기반 추천 및 경로 최적화 |
 
-# e2e tests
-$ yarn run test:e2e
+<br />
 
-# test coverage
-$ yarn run test:cov
-```
+## 1️⃣ Step 1: 숏폼 기반 장소 탐색
 
-## Deployment
+![step_1](https://github.com/user-attachments/assets/23866bfd-7839-418e-b3f0-134a7e625d53)
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+- 사용자는 여행 일정을 입력하고, 입력한 조건에 맞춘 숏폼을 확인할 수 있습니다.
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+- 직관적으로 정보를 얻을 수 있는 숏폼을 기반으로 여행지를 탐색하고, 저장합니다.
 
-```bash
-$ yarn install -g @nestjs/mau
-$ mau deploy
-```
+<br />
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## 2️⃣ Step 2: 위치 기반 루트 제안 및 저장 기능
 
-## Resources
+![step_2](https://github.com/user-attachments/assets/097fb06f-f4e6-43cd-915d-3434a015444a)
 
-Check out a few resources that may come in handy when working with NestJS:
+- 내가 담은 정소로 나만의 여행 코스를 만들 수 있습니다.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+- 시간대별로 예상되는 혼잡도 정보를 제공하여 한적한 곳 위주로 경로를 탐색할 수 있도록 합니다.
 
-## Support
+<br />
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 3️⃣ Step 3: 혼잡도 기반 추천
 
-## Stay in touch
+![step_3](https://github.com/user-attachments/assets/f9b9092b-cd18-45e8-bfa0-851e2b55887c)
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- 실시간 혼잡도 데이터를 반영한 장소를 추천합니다.
 
-## License
+- 사용자가 저장한 장소들을 기반으로, 거리·이동·시간 혼잡도를 고려해 AI가 자동으로 여행 일정을 설계합니다.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+<br /><br />
+
+# 🏝️ 개발 _Tech_
+
+![tech_stack](https://github.com/user-attachments/assets/62726373-3f2b-4acc-ac5b-096afd0b0131)
+
+<br /><br />
+
+# 🏅 팀원 _Team_
+
+<table>
+  <tr>
+    <th>기획자</th>
+    <th>디자이너</th>
+    <th>백엔드</th>
+    <th>프론트엔드</th>
+    <th>프론트엔드</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <img width="100" alt="돌하르방" src="https://github.com/user-attachments/assets/34eb29fd-d0f4-408b-8080-4213557e9bac" />
+    </td>
+    <td align="center">
+      <img width="100" alt="돌하르방" src="https://github.com/user-attachments/assets/34eb29fd-d0f4-408b-8080-4213557e9bac" />
+    </td>
+    <td align="center">
+      <img width="100" alt="돌하르방" src="https://github.com/user-attachments/assets/34eb29fd-d0f4-408b-8080-4213557e9bac" />
+    </td>
+    <td align="center">
+      <img width="100" alt="돌하르방" src="https://github.com/user-attachments/assets/34eb29fd-d0f4-408b-8080-4213557e9bac" />
+    </td>
+    <td align="center">
+      <img width="100" alt="돌하르방" src="https://github.com/user-attachments/assets/34eb29fd-d0f4-408b-8080-4213557e9bac" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="mailto:8clara@gachon.ac.kr" ><b>변교리</b></a>
+    </td>
+    <td align="center">
+      <a href="s94291495@gmail.com"><b>송정연</b></a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/jinhyo" target="_blank" rel="noopener noreferrer"><b>정진효</b></a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/eungwang1" target="_blank" rel="noopener noreferrer"><b>심은광</b></a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/hansololiviakim" target="_blank" rel="noopener noreferrer"><b>김한솔</b></a>
+    </td>
+  </tr>
+</table>
