@@ -6,6 +6,10 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
     kubernetes.io/ingress.class: 'nginx'
 spec:
+  tls:
+    - hosts:
+        - api.jejugo.goorm.training
+      secretName: jejugo-tls-secret
   rules:
     - host: api.jejugo.goorm.training
       http:

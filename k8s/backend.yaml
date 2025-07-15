@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: 837126493345.dkr.ecr.ap-northeast-2.amazonaws.com/team1/backend:18
+          image: 837126493345.dkr.ecr.ap-northeast-2.amazonaws.com/team1/backend:latest
           ports:
             - containerPort: 3001
           volumeMounts:
@@ -30,6 +30,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nodejs-backend
+  namespace: goormthon-1
 spec:
   selector:
     app: nodejs-backend
