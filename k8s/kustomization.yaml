@@ -1,8 +1,0 @@
-resources:
-  - backend.yaml
-  - ingress.yaml
-
-configMapGenerator:
-  - name: nodejs-backend-config
-    files:
-      - config/config.json
